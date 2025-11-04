@@ -49,10 +49,11 @@ const userSchema= new mongoose.Schema({
         type:[String]
     }
 },{timestamps:true})
+userSchema.index({firstName:1,lastName:1});
 
 userSchema.methods.getJWT=async function(){
     const user=this;
-    const token=jwt.sign({_id:user._id},"password",{expiresIn:600});
+    const token=jwt.sign({_id:user._id},"password",{expiresIn:6000});
     return token
 
 }
