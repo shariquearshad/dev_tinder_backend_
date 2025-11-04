@@ -52,9 +52,14 @@ const userSchema= new mongoose.Schema({
 
 userSchema.methods.getJWT=async function(){
     const user=this;
-    const token=jwt.sign({_id:user._id},"password",{expiresIn:60});
+    const token=jwt.sign({_id:user._id},"password",{expiresIn:600});
     return token
 
+}
+userSchema.methods.getExpireJwt=async function() {
+       const user=this;
+    const token=jwt.sign({_id:user._id},"password",{expiresIn:0});
+    return token
 }
 userSchema.methods.validatePassword=async function(password){
     const user=this;
