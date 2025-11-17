@@ -5,14 +5,14 @@ const {userAuth}= require("../middelware/auth")
 const {validateEditProfileData}=require("../helpers/validation");
 
 
-profileRouter.get("/profile",userAuth,async(req,res)=>{
+profileRouter.get("/profile/view",userAuth,async(req,res)=>{
     try{
    
 
     
     const user=req.user;
     if(!user){
-      throw new Error("user not found");
+      return res.status(401);
     }
 
 
@@ -54,7 +54,7 @@ profileRouter.patch("/profile/edit",userAuth,async(req,res)=>{
         await loggedInUser.save();
 
        
-        res.send("user updated successfully");
+        res.send(loggedInUser);
     }
     catch(err){
           res.status(400).send("ERROR "+err.message )

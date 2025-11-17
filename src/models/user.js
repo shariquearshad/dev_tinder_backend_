@@ -39,7 +39,8 @@ const userSchema= new mongoose.Schema({
         }
     },
     photoUrl:{
-        type:String
+        type:String,
+        default:"https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
     },
     about:{
         type:String,
@@ -53,7 +54,7 @@ userSchema.index({firstName:1,lastName:1});
 
 userSchema.methods.getJWT=async function(){
     const user=this;
-    const token=jwt.sign({_id:user._id},"password",{expiresIn:6000});
+    const token=jwt.sign({_id:user._id},"password");
     return token
 
 }

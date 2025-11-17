@@ -13,7 +13,7 @@ authRouter.post("/signup",async (req,res)=>{
     const userObj=req.body
     validateSignupData(req);
     console.log(userObj)
-    const {firstName,lastName,emailId,password}=req.body;
+    const {firstName,lastName,emailId,password,gender,skills,age}=req.body;
 
     const passwordHash=await bcrypt.hash(password,10);
     console.log(passwordHash);
@@ -25,7 +25,7 @@ authRouter.post("/signup",async (req,res)=>{
     // }
     // creating a new instance of the user model
     const user=new User({
-        firstName,lastName,emailId,password:passwordHash
+        firstName,lastName,emailId,password:passwordHash,gender,skills,age
     });
 
      await user.save();
@@ -56,7 +56,7 @@ authRouter.post("/login",async(req,res)=>{
 
             //add token to cookie and send the responce to the user
             res.cookie("token",token);
-            res.send("Password Valid");
+            res.send(user);
         }
         else{
             throw new Error("Invalid Credential");

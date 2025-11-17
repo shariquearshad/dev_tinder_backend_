@@ -9,7 +9,7 @@ const userAuth=async (req,res,next)=>{
      const cookies=req.cookies;
     const {token}=cookies;
      if(!token){
-           throw new Error("token not found");
+           return res.status(401).send("Please loggin")
         }
         const decodedValue=jwt.verify(token,"password");
          const user=await User.findById(decodedValue?._id);
