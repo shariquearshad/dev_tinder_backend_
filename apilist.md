@@ -21,3 +21,15 @@ userRouter
 -get /user/feed. = Gets you the profile of other users platform
 
 status: ignore,intrested,accept,rejected
+
+
+deployment of backend server
+
+update DB password
+assow ec2 instance on mongo server
+npm install pm2 -g
+pm2 start npm -- start
+pm2 logs
+pm2 flush <name>,pm2 stop <name>, pm2 delete <name>
+
+
