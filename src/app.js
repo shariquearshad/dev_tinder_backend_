@@ -5,6 +5,8 @@ const connectDb=require('./config/database')
 const User=require("./models/user");
 const cookieParser=require("cookie-parser");
 const cors=require("cors");
+require("dotenv").config();
+
 app.use(cors({
     origin:"http://localhost:5173",
     credentials:true
@@ -64,7 +66,7 @@ catch(err){
 
 connectDb().then(()=>{
     console.log("Database connected successfull");
-    app.listen(3000,()=>{
+    app.listen(process.env.PORT,()=>{
     console.log("listening on port 3000")
 });
 }).catch(err=>{
