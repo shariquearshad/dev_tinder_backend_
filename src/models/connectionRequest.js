@@ -15,7 +15,7 @@ status:{
     type:String,
     require:true,
     enum:{
-        values:["ignore","intrested","accept","reject"],
+        values:["ignored","intrested","accepted","rejected"],
         message:`{VALUE} is incorrect status type`
     }
 }

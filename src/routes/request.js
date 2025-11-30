@@ -11,7 +11,7 @@ requestRouter.post("/request/send/:status/:toUserId",userAuth,async(req,res)=>{
     const fromUserId=req.user._id;
     const toUserId=req.params.toUserId;
     const status=req.params.status;
-    const allowedStatus=["intrested","ignore"]
+    const allowedStatus=["intrested","ignored"]
  
     if(!allowedStatus.includes(status)){
         return res.status(400).json(`invalid status type ${status}`);
@@ -54,7 +54,7 @@ requestRouter.post("/request/review/:status/:requestId",userAuth, async (req,res
     try{
     const user=req.user;
     console.log(user);
-   const allowedStatus=["reject","accept"];
+   const allowedStatus=["rejected","accepted"];
     const {status,requestId}=req.params;
     console.log(requestId);
     if(!allowedStatus.includes(status)){

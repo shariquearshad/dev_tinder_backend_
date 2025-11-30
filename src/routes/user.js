@@ -6,7 +6,7 @@ const USER_SAFE_DATA=["firstName","lastName","photoUrl","age","gender","about","
 const User=require("../models/user");
 
 //get all pending conection request for the logged in uaer
-userRouter.get("/user/requests",userAuth,async (req,res)=>{
+userRouter.get("/user/requests/received",userAuth,async (req,res)=>{
    try{
     const loggedInUser=req.user;
     const connectionReq=await ConnectionRequest.find({
@@ -29,8 +29,8 @@ userRouter.get("/user/connections",userAuth,async (req,res)=>{
         console.log(loggedInUser);
         const connectionRequests=await ConnectionRequest.find({
             $or:[
-                {toUserId:loggedInUser._id,status:"accept"},
-                 {fromUserId:loggedInUser._id,status:"accept"}
+                {toUserId:loggedInUser._id,status:"accepted"},
+                 {fromUserId:loggedInUser._id,status:"accepted"}
             ]
         }).populate("fromUserId",USER_SAFE_DATA).populate("toUserId",USER_SAFE_DATA);
         console.log()

@@ -21,14 +21,16 @@ const authRouter=require("./routes/auth");
 const profileRouter=require("./routes/profile");
 const requestRouter=require("./routes/request");
 const userRouter=require("./routes/user");
-
-
-
+const chatRouter=require("./routes/chat")
+const http =require("http");
+const { initializeSocket } = require("./utils/socket");
 app.use("/",authRouter);
 app.use("/",profileRouter);
 app.use("/",requestRouter);
 app.use("/",userRouter);
-
+app.use("/",chatRouter);
+const server =http.createServer(app);
+initializeSocket(server);
 app.delete("/user",async (req, res)=>{
  try{
     const userId=req.body.userId;
@@ -66,7 +68,7 @@ catch(err){
 
 connectDb().then(()=>{
     console.log("Database connected successfull");
-    app.listen(process.env.PORT,()=>{
+    server.listen(process.env.PORT,()=>{
     console.log("listening on port 3000")
 });
 }).catch(err=>{
